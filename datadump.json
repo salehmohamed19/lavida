@@ -1,0 +1,269 @@
+[
+{
+    "model": "auth.user",
+    "fields": {
+        "password": "pbkdf2_sha256$1200000$O7WW710lP7qWrzkWLXtNPk$cUIYOHAqBSMaU801mlgZJCVYsOuXDONyGdXK7xESh8Q=",
+        "last_login": "2026-09-13T14:50:13.508Z",
+        "is_superuser": true,
+        "username": "saleh",
+        "first_name": "",
+        "last_name": "",
+        "email": "salehrabia87@gmail.com",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2026-09-13T14:47:09.229Z",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "s8cnvk5e07y6404rlijyhfzxu4723mbd",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSEdHg64dO83EOgMUjWQlHZl_HfbpAvd3nPOfYsQ16WEtfMcJhIXAeL0u6U4PrnugB6x3pscW13mKcldkQft8taIX9fD_TsosZet1kgKzcCe-IwemdCD0sBWO2MIsiJjMWvKkGFzLbvEA4P15MDqlMTnC8wTN4k:1x5lX3:kcKGk45tV4jz2KdJ2WBKfFaAfhWcv08hDv2IHgnUU10",
+        "expire_date": "2026-09-27T14:50:13.522Z"
+    }
+},
+{
+    "model": "store.category",
+    "pk": 1,
+    "fields": {
+        "name": "€—› ‰Ê„"
+    }
+},
+{
+    "model": "store.category",
+    "pk": 2,
+    "fields": {
+        "name": "€—› ”›—…"
+    }
+},
+{
+    "model": "store.category",
+    "pk": 3,
+    "fields": {
+        "name": "«‰ —ÌÂ«  Ê’«·Ê‰« "
+    }
+},
+{
+    "model": "store.category",
+    "pk": 4,
+    "fields": {
+        "name": "—ﬂ‰Ì« "
+    }
+},
+{
+    "model": "store.category",
+    "pk": 5,
+    "fields": {
+        "name": "ÿ«Ê·«  Ê —«»Ì“« "
+    }
+},
+{
+    "model": "store.category",
+    "pk": 6,
+    "fields": {
+        "name": "√À«À „ﬂ »Ì / „ﬂ« »"
+    }
+},
+{
+    "model": "store.category",
+    "pk": 7,
+    "fields": {
+        "name": "œÌﬂÊ—«  Ê≈ﬂ””Ê«—« "
+    }
+},
+{
+    "model": "store.product",
+    "pk": 1,
+    "fields": {
+        "category": 4,
+        "name": "—ﬂ‰… «·ÿÌ«—…",
+        "description": "«·„Ê«’›«  «·Œ«’…:\r\nﬂ‰»… ”—Ì—\r\n«·‘Ì“·Ê‰Ã »Â« ”Õ«—…\r\n\r\n«·√»⁄«œ:\r\n⁄—÷ 220 ”„° ⁄„ﬁ 185 ”„\r\n\r\n«·Œ«„« :\r\nŒ‘» «·“«‰ «·ÿ»Ì⁄Ì\r\n\r\n«·÷„«‰:\r\n3 ”‰Ê« ",
+        "price": null,
+        "status": "in_stock",
+        "main_image": "products/download.jfif",
+        "created_at": "2026-09-13T14:56:41.795Z"
+    }
+},
+{
+    "model": "store.productimage",
+    "pk": 1,
+    "fields": {
+        "product": 1,
+        "image": "products/gallery/rkn-lyo-thnayy-1223272.webp",
+        "order": 0
+    }
+},
+{
+    "model": "store.productimage",
+    "pk": 2,
+    "fields": {
+        "product": 1,
+        "image": "products/gallery/rkn-lyo-thnayy-5580273.webp",
+        "order": 0
+    }
+},
+{
+    "model": "store.productimage",
+    "pk": 3,
+    "fields": {
+        "product": 1,
+        "image": "products/gallery/rkn-lyo-thnayy-6435010.webp",
+        "order": 0
+    }
+},
+{
+    "model": "store.productimage",
+    "pk": 4,
+    "fields": {
+        "product": 1,
+        "image": "products/gallery/rkn-lyo-thnayy-6619742.webp",
+        "order": 0
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 1,
+    "fields": {
+        "action_time": "2026-09-13T14:51:34.729Z",
+        "user": [
+            "saleh"
+        ],
+        "content_type": [
+            "store",
+            "category"
+        ],
+        "object_id": "1",
+        "object_repr": "€—› ‰Ê„",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2026-09-13T14:51:43.489Z",
+        "user": [
+            "saleh"
+        ],
+        "content_type": [
+            "store",
+            "category"
+        ],
+        "object_id": "2",
+        "object_repr": "€—› ”›—…",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2026-09-13T14:51:51.905Z",
+        "user": [
+            "saleh"
+        ],
+        "content_type": [
+            "store",
+            "category"
+        ],
+        "object_id": "3",
+        "object_repr": "«‰ —ÌÂ«  Ê’«·Ê‰« ",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2026-09-13T14:52:00.316Z",
+        "user": [
+            "saleh"
+        ],
+        "content_type": [
+            "store",
+            "category"
+        ],
+        "object_id": "4",
+        "object_repr": "—ﬂ‰Ì« ",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2026-09-13T14:52:07.585Z",
+        "user": [
+            "saleh"
+        ],
+        "content_type": [
+            "store",
+            "category"
+        ],
+        "object_id": "5",
+        "object_repr": "ÿ«Ê·«  Ê —«»Ì“« ",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+        "action_time": "2026-09-13T14:52:14.821Z",
+        "user": [
+            "saleh"
+        ],
+        "content_type": [
+            "store",
+            "category"
+        ],
+        "object_id": "6",
+        "object_repr": "√À«À „ﬂ »Ì / „ﬂ« »",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 7,
+    "fields": {
+        "action_time": "2026-09-13T14:52:21.955Z",
+        "user": [
+            "saleh"
+        ],
+        "content_type": [
+            "store",
+            "category"
+        ],
+        "object_id": "7",
+        "object_repr": "œÌﬂÊ—«  Ê≈ﬂ””Ê«—« ",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 8,
+    "fields": {
+        "action_time": "2026-09-13T14:56:41.806Z",
+        "user": [
+            "saleh"
+        ],
+        "content_type": [
+            "store",
+            "product"
+        ],
+        "object_id": "1",
+        "object_repr": "—ﬂ‰… «·ÿÌ«—…",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}, {\"added\": {\"name\": \"\\u0635\\u0648\\u0631\\u0629 \\u0644\\u0644\\u0645\\u0639\\u0631\\u0636\", \"object\": \"ProductImage object (1)\"}}, {\"added\": {\"name\": \"\\u0635\\u0648\\u0631\\u0629 \\u0644\\u0644\\u0645\\u0639\\u0631\\u0636\", \"object\": \"ProductImage object (2)\"}}, {\"added\": {\"name\": \"\\u0635\\u0648\\u0631\\u0629 \\u0644\\u0644\\u0645\\u0639\\u0631\\u0636\", \"object\": \"ProductImage object (3)\"}}, {\"added\": {\"name\": \"\\u0635\\u0648\\u0631\\u0629 \\u0644\\u0644\\u0645\\u0639\\u0631\\u0636\", \"object\": \"ProductImage object (4)\"}}]"
+    }
+}
+]
