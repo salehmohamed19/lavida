@@ -49,6 +49,15 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # ضغط الصورة الرئيسية تلقائياً بـ Pillow
+        if self.main_image and os.path.exists(self.main_image.path):
+            img = Image.open(self.main_image.path)
+            if img.height > 1200 or img.width > 1200:
+                img.thumbnail((1200, 1200))
+                img.save(self.main_image.path, optimize=True, quality=85)
+
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='gallery', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='products/gallery/', verbose_name="صورة إضافية")
@@ -58,3 +67,11 @@ class ProductImage(models.Model):
         verbose_name = "صورة للمعرض"
         verbose_name_plural = "صور معرض المنتج"
         ordering = ['order']
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        if self.image and os.path.exists(self.image.path):
+            img = Image.open(self.image.path)
+            if img.height > 1200 or img.width > 1200:
+                img.thumbnail((1200, 1200))
+                img.save(self.image.path, optimize=True, quality=85)
