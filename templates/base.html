@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -14,7 +14,7 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-900 flex flex-col min-h-screen pb-20 md:pb-0">
+<body class="bg-gray-100 text-gray-900 flex flex-col min-h-screen">
 
     <!-- الهيدر العلوي للموبايل والدسكتب -->
     <header class="bg-white shadow-sm sticky top-0 z-50 border-b">
@@ -32,14 +32,15 @@
         </div>
     </header>
 
+    <!-- المحتوى الرئيسي يتمدد ليدفع الفوتر للأسفل -->
     <main class="flex-grow max-w-7xl mx-auto px-3 sm:px-4 py-4 md:py-8 w-full">
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="bg-gray-900 text-gray-400 py-6 border-t border-gray-800 text-center text-xs md:text-sm">
+    <!-- الفوتر مثبت دائماً في أسفل الشاشة -->
+    <footer class="bg-gray-900 text-gray-400 py-6 border-t border-gray-800 text-center text-xs md:text-sm mt-auto w-full">
         <div class="max-w-7xl mx-auto px-4 space-y-2">
             <p>جميع الحقوق محفوظة  ©  مهندس / صالح محمد صالح</p>
-           
         </div>
     </footer>
 
