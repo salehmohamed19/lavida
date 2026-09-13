@@ -51,12 +51,15 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        # ضغط الصورة الرئيسية تلقائياً بـ Pillow
-        if self.main_image and os.path.exists(self.main_image.path):
-            img = Image.open(self.main_image.path)
-            if img.height > 1200 or img.width > 1200:
-                img.thumbnail((1200, 1200))
-                img.save(self.main_image.path, optimize=True, quality=85)
+        # معالجة الضغط مع Cloudinary ومحلياً بدون إحداث خطأ NotImplementedError
+        try:
+            if self.main_image and hasattr(self.main_image, 'path') and os.path.exists(self.main_image.path):
+                img = Image.open(self.main_image.path)
+                if img.height > 1200 or img.width > 1200:
+                    img.thumbnail((1200, 1200))
+                    img.save(self.main_image.path, optimize=True, quality=85)
+        except (NotImplementedError, AttributeError):
+            pass
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, related_name='gallery', on_delete=models.CASCADE)
@@ -70,8 +73,11 @@ class ProductImage(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        if self.image and os.path.exists(self.image.path):
-            img = Image.open(self.image.path)
-            if img.height > 1200 or img.width > 1200:
-                img.thumbnail((1200, 1200))
-                img.save(self.image.path, optimize=True, quality=85)
+        try:
+            if self.image and hasattr(self.image, 'path') and os.path.exists(self.image.path):
+                img = Image.open(self.image.path)
+                if img.height > 1200 or img.width > 1200:
+                    img.thumbnail((1200, 1200))
+                    img.save(self.image.path, optimize=True, quality=85)
+        except (NotImplementedError, AttributeError):
+            pass
