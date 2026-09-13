@@ -23,11 +23,19 @@
                 <img src="https://res.cloudinary.com/hht6pzhc/image/upload/v1789328011/464215324_122116015034406739_2225750553343489211_n.jpg" 
                      alt="لوجو معرض الأثاث" 
                      class="w-9 h-9 md:w-11 md:h-11 object-cover rounded-full border border-amber-800/20 shadow-sm">
-                <span>لافيدا للأثاث</span>
+                <span>لافيدا </span>
             </a>
             
-            <div class="flex items-center gap-3">
-                <a href="{% url 'about_us' %}" class="text-xs md:text-sm font-semibold text-gray-700 hover:text-amber-800">من نحن</a>
+            <div class="flex items-center gap-2 md:gap-3">
+                <!-- زر إضافة منتج يظهر للأدمن فقط -->
+                {% if user.is_authenticated and user.is_staff %}
+                    <a href="{% url 'add_product_custom' %}" class="bg-amber-900 hover:bg-amber-800 text-white px-3 py-1.5 rounded-lg text-xs md:text-sm font-bold transition flex items-center gap-1 shadow-sm">
+                        <span>➕</span> <span class="hidden sm:inline">إضافة منتج</span>
+                    </a>
+                {% endif %}
+
+                <a href="{% url 'about_us' %}" class="text-xs md:text-sm font-semibold text-gray-700 hover:text-amber-800 px-1">من نحن</a>
+                
                 <a href="https://wa.me/201003978938" target="_blank" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs md:text-sm font-bold transition flex items-center gap-1 shadow-sm">
                     💬 <span class="hidden sm:inline">تواصل مباشر</span>
                 </a>
@@ -35,7 +43,7 @@
         </div>
     </header>
 
-    <!-- المحتوى الرئيسي يتمدد ليدفع الفوتر للأسفل -->
+    <!-- المحتوى الرئيسي -->
     <main class="flex-grow max-w-7xl mx-auto px-3 sm:px-4 py-4 md:py-8 w-full">
         {% block content %}{% endblock %}
     </main>
