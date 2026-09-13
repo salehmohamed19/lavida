@@ -81,9 +81,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ] if os.path.exists(BASE_DIR / 'static') else []
 
-# التغيير للآمن عشان ما يضربش الـ Build
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-
+# بدلاً من CompressedStaticFilesStorage استخدم الكلاس العادي المستقر
+STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
