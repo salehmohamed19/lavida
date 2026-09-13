@@ -13,16 +13,16 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'cloudinary_storage',
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
     'cloudinary',
     'store',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # إضافة WhiteNoise هنا أساسية
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -81,8 +81,8 @@ STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ] if os.path.exists(BASE_DIR / 'static') else []
 
-# بدلاً من CompressedStaticFilesStorage استخدم الكلاس العادي المستقر
 STATICFILES_STORAGE = 'whitenoise.storage.StaticFilesStorage'
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
