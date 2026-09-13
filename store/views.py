@@ -57,3 +57,24 @@ def product_detail(request, pk):
 
 def about_us(request):
     return render(request, 'store/about.html')
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib import messages
+from .forms import ProductForm
+
+def is_staff_user(user):
+    return user.is_authenticated and user.is_staff
+
+@user_passes_test(is_staff_user, login_url='/admin/login/')
+def add_product_custom(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            messages.success(request, f'تمت إضافة المنتج "{product.name}" بنجاح!')
+            return redirect('add_product_custom')
+    else:
+        form = ProductForm()
+        
+    return render(request, 'store/add_product.html', {'form': form})
