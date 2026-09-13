@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- البنرات الإعلانية -->
+{% if banners %}
+<div class="mb-5 overflow-hidden rounded-2xl shadow-md bg-amber-950 text-white">
+    {% for banner in banners %}
+    <div class="relative h-48 sm:h-64 md:h-80 flex items-center justify-center text-center p-4 bg-cover bg-center" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('{{ banner.image.url }}');">
+        <div>
+            <h2 class="text-2xl sm:text-4xl font-extrabold mb-2">{{ banner.title }}</h2>
+            {% if banner.subtitle %}<p class="text-xs sm:text-lg text-amber-200 mb-3">{{ banner.subtitle }}</p>{% endif %}
+            {% if banner.link %}
+                <a href="{{ banner.link }}" class="inline-block bg-amber-700 hover:bg-amber-800 text-white text-xs sm:text-sm font-bold py-2 px-5 rounded-xl transition">استكشف العرض</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<!-- شريط البحث والفلترة للموبايل -->
+<div class="bg-white p-3 sm:p-5 rounded-2xl shadow-sm mb-6 space-y-3">
+    <form method="GET" action="{% url 'product_list' %}" class="flex gap-2">
+        <input type="text" name="q" value="{{ query }}" placeholder="ابحث عن قطعة أثاث..." 
+               class="flex-grow px-3 py-2.5 text-sm rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-800 bg-gray-50">
+        {% if selected_category %}<input type="hidden" name="category" value="{{ selected_category }}">{% endif %}
+        <button type="submit" class="bg-amber-800 hover:bg-amber-900 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition">بحث</button>
+    </form>
+
+    <!-- الأقسام سحب أفقي للموبايل -->
+    <div class="flex gap-2 overflow-x-auto no-scrollbar pt-1 pb-1">
+        <a href="{% url 'product_list' %}" class="whitespace-nowrap px-4 py-1.5 rounded-full border text-xs font-bold transition {% if not selected_category %}bg-amber-800 text-white border-amber-800{% else %}text-gray-700 bg-gray-50 border-gray-200{% endif %}">
+            الكل
+        </a>
+        {% for cat in categories %}
+            <a href="?category={{ cat.id }}{% if query %}&q={{ query }}{% endif %}" class="whitespace-nowrap px-4 py-1.5 rounded-full border text-xs font-bold transition {% if selected_category == cat.id %}bg-amber-800 text-white border-amber-800{% else %}text-gray-700 bg-gray-50 border-gray-200{% endif %}">
+                {{ cat.name }}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- شبكة المنتجات (منتجين بكل صف في الموبايل) -->
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+    {% for product in products %}
+    <div class="bg-white rounded-xl sm:rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition flex flex-col justify-between">
+        <div>
+            <div class="h-40 sm:h-56 overflow-hidden bg-gray-100 relative">
+                <img src="{{ product.main_image.url }}" alt="{{ product.name }}" loading="lazy" class="w-full h-full object-cover">
+                <span class="absolute top-2 right-2 text-[10px] sm:text-xs font-bold px-2 py-0.5 rounded-md text-white shadow-sm
+                    {% if product.status == 'in_stock' %}bg-emerald-600
+                    {% elif product.status == 'on_demand' %}bg-amber-600
+                    {% else %}bg-rose-600{% endif %}">
+                    {{ product.get_status_display }}
+                </span>
+            </div>
+            
+            <div class="p-2.5 sm:p-4">
+                <h2 class="text-xs sm:text-base font-bold text-gray-800 truncate mb-1">{{ product.name }}</h2>
+                {% if product.price %}
+                    <p class="text-amber-800 font-extrabold text-sm sm:text-lg mb-1">{{ product.price }} ج.م</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="p-2.5 sm:p-4 pt-0">
+            <a href="{% url 'product_detail' product.pk %}" class="block text-center w-full bg-amber-900/10 hover:bg-amber-800 hover:text-white text-amber-900 font-bold py-1.5 sm:py-2 rounded-lg text-xs sm:text-sm transition">
+                التفاصيل
+            </a>
+        </div>
+    </div>
+    {% empty %}
+        <p class="text-gray-500 col-span-full text-center py-12 text-sm sm:text-base">لم يتم العثور على أثاث يطابق بحثك.</p>
+    {% endfor %}
+</div>
+{% endblock %}

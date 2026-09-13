@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-2xl shadow-sm border p-4 sm:p-8 space-y-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        
+        <!-- معرض الصور -->
+        <div>
+            <div class="rounded-xl overflow-hidden border shadow-sm mb-3 h-64 sm:h-96 bg-gray-50 flex items-center justify-center">
+                <img id="mainDisplay" src="{{ product.main_image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover">
+            </div>
+            
+            {% if product.gallery.all %}
+            <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+                <img src="{{ product.main_image.url }}" onclick="changeImage(this.src)" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border-2 border-amber-800 cursor-pointer shrink-0">
+                {% for img in product.gallery.all %}
+                    <img src="{{ img.image.url }}" onclick="changeImage(this.src)" class="w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border cursor-pointer shrink-0 opacity-80 hover:opacity-100">
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- معلومات قطعة الأثاث -->
+        <div class="flex flex-col justify-between">
+            <div>
+                <a href="{% url 'product_list' %}" class="text-amber-800 text-xs sm:text-sm font-bold mb-2 inline-block">← العودة للمتجر</a>
+                
+                <div class="mb-2">
+                    <span class="inline-block text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-md text-white
+                        {% if product.status == 'in_stock' %}bg-emerald-600
+                        {% elif product.status == 'on_demand' %}bg-amber-600
+                        {% else %}bg-rose-600{% endif %}">
+                        {{ product.get_status_display }}
+                    </span>
+                </div>
+
+                <h1 class="text-xl sm:text-3xl font-bold text-gray-900 mb-2">{{ product.name }}</h1>
+                
+                {% if product.price %}
+                    <div class="text-xl sm:text-2xl font-extrabold text-amber-800 mb-4">{{ product.price }} ج.م</div>
+                {% endif %}
+
+                <p class="text-gray-600 leading-relaxed text-sm sm:text-base mb-6 whitespace-pre-line">{{ product.description }}</p>
+            </div>
+
+            <!-- أزرار التواصل والمشاركة للديسكتب -->
+            <div class="hidden md:block space-y-3 pt-4 border-t">
+                <a href="{{ whatsapp_url }}" target="_blank" 
+                   class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl flex items-center justify-center gap-2 shadow-sm transition text-base">
+                    <span>طلب واستفسار عبر الواتساب</span>
+                </a>
+
+                <div class="flex gap-2">
+                    <button onclick="copyProductLink()" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-2 rounded-xl border text-xs">
+                        📋 نسخ الرابط
+                    </button>
+                    <a href="https://www.facebook.com/sharer/sharer.php?u={{ product_url|urlencode }}" target="_blank" 
+                       class="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-center font-bold py-2 rounded-xl text-xs">
+                        مشاركة
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- قسم منتجات يختارها العملاء مع هذا المنتج (مثل قباني) -->
+    <div class="pt-6 border-t">
+        <h3 class="text-base sm:text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            🛍️ <span>منتجات يختارها العملاء مع هذا المنتج</span>
+        </h3>
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
+            {% for item in related_products %}
+            <div class="bg-gray-50 rounded-xl border p-2 flex flex-col justify-between">
+                <a href="{% url 'product_detail' item.pk %}" class="block">
+                    <div class="h-28 sm:h-36 rounded-lg overflow-hidden bg-gray-200 mb-2">
+                        <img src="{{ item.main_image.url }}" alt="{{ item.name }}" class="w-full h-full object-cover">
+                    </div>
+                    <h4 class="text-xs sm:text-sm font-bold text-gray-800 truncate mb-1">{{ item.name }}</h4>
+                    {% if item.price %}
+                        <p class="text-amber-800 font-extrabold text-xs sm:text-sm">{{ item.price }} ج.م</p>
+                    {% endif %}
+                </a>
+                <a href="{% url 'product_detail' item.pk %}" class="mt-2 block text-center bg-white border border-amber-800 text-amber-800 font-bold py-1 rounded-lg text-[11px] hover:bg-amber-800 hover:text-white transition">
+                    عرض المنتج
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- شريط طلب الواتساب الثابت للموبايل (Sticky Bottom Bar) -->
+<div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t p-3 z-50 flex items-center justify-between gap-2 shadow-lg">
+    {% if product.price %}
+        <div>
+            <span class="text-[10px] text-gray-500 block">السعر</span>
+            <span class="text-sm font-extrabold text-amber-900">{{ product.price }} ج.م</span>
+        </div>
+    {% endif %}
+    <a href="{{ whatsapp_url }}" target="_blank" class="flex-grow bg-emerald-600 hover:bg-emerald-700 text-white text-center font-bold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-1">
+        <span>طلب عبر الواتساب</span>
+    </a>
+</div>
+
+<script>
+    function changeImage(src) {
+        document.getElementById('mainDisplay').src = src;
+    }
+
+    function copyProductLink() {
+        navigator.clipboard.writeText(window.location.href);
+        alert('تم نسخ رابط المنتج بنجاح!');
+    }
+</script>
+{% endblock %}

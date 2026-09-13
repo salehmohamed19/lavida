@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}من نحن {% endblock %}
+
+{% block content %}
+<div class="bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto space-y-8">
+    <div class="text-center border-b pb-6">
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-3">من نحن</h1>
+        <p class="text-gray-600 text-lg">نحن معرض أثاث متقن، متخصصون في تصنيع وبيع الأثاث المنزلي والمكتبي بأعلى جودة وخشب زان فاخر.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="space-y-4">
+            <h2 class="text-xl font-bold text-amber-800">معلومات التواصل</h2>
+            <p class="text-gray-700">📍 <strong>العنوان:</strong> دمياط الجديدة - المنطقة الصناعية</p>
+            <p class="text-gray-700">📞 <strong>الهاتف / الواتساب:</strong> 01003978938</p>
+            <p class="text-gray-700">🕒 <strong>مواعيد العمل:</strong> يومياً من 10 صباحاً حتى 10 مساءً (الجمعة عطلة)</p>
+        </div>
+
+        <div class="space-y-4">
+            <h2 class="text-xl font-bold text-amber-800">موقعنا على الخريطة</h2>
+            <div class="w-full h-48 bg-gray-200 rounded-xl overflow-hidden border">
+                <iframe src="https://maps.google.com/maps?q=Damietta&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                        class="w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
